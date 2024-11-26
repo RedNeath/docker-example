@@ -1,0 +1,43 @@
+services:
+    web:
+        image: shinsenter/symfony:dev-php8.3-alpine
+        volumes:
+            - ./docker-example-php:/var/www/html
+        ports:
+            - "8080:80"
+    vue:
+        image: node:22-alpine3.20
+        working_dir: /app
+        environment:
+            - NODE_ENV=dev
+        volumes:
+            - ./docker-example-vue:/app
+        expose:
+            - "5173"
+        ports:
+            - "8081:5173"
+        command: "npm run dev -- --host"
+
+    mail:
+        image: mailhog/mailhog:v1.0.1
+        restart: on-failure
+        ports:
+            - "1025:1025" # SMTP port
+            - "8085:8025"
+
+    db:
+        image: mysql:8
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: docker-example
+            MYSQL_DATABASE: docker-example-db
+            MYSQL_USER: docker-example-user
+            MYSQL_PASSWORD: docker-example-user-password
+        ports:
+            - "8086:3306"
+        volumes:
+            - db_data:/var/lib/mysql
+
+volumes:
+    db_data:
+
