@@ -5,6 +5,8 @@ services:
             - ./docker-example-php:/var/www/html
         ports:
             - "8080:80"
+        depends_on:
+            - db
     vue:
         image: node:22-alpine3.20
         working_dir: /app
