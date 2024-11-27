@@ -1,0 +1,6 @@
+[submodule "docker-example-vue"]
+	path = docker-example-vue
+	url = git@github.com:RedNeath/docker-example-vue.git
+[submodule "docker-example-php"]
+	path = docker-example-php
+	url = git@github.com:RedNeath/docker-example-php.git
