@@ -19,6 +19,17 @@ services:
         ports:
             - "8081:5173"
         command: "npm run dev -- --host"
+        depends_on:
+            - web
+
+    swagger:
+        image: swaggerapi/swagger-ui
+        ports:
+            - "8084:8080"
+        environment:
+            - SWAGGER_JSON_URL=http://localhost:8080/api/openapi.json
+        depends_on:
+            - web
 
     mail:
         image: mailhog/mailhog:v1.0.1
