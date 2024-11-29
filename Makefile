@@ -1,3 +1,5 @@
+owner != whoami
+
 run:
 	docker compose up -d
 
@@ -16,5 +18,8 @@ db-root:
 
 
 
-web-bash:
+wsh:
 	docker exec -it docker-example-web-1 bash
+
+owner:
+	sudo chown -R $(owner):$(owner) ./docker-example-*
